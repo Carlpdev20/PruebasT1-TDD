@@ -110,4 +110,17 @@ public class MultaServiceImpl implements IMultaService {
                 .toList());
         return dto;
     }
+
+    @Override
+    public void actualizarEstados() {
+        List<Multa> pendientes = multaRepository.findByEstado(EstadoMulta.PENDIENTE);
+        LocalDate hoy = LocalDate.now();
+
+        for (Multa m : pendientes) {
+            if (m.getFechaVencimiento().isBefore(hoy)) {
+                m.setEstado(EstadoMulta.VENCIDA);
+                multaRepository.save(m);
+            }
+        }
+    }
 }

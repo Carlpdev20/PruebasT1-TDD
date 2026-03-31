@@ -45,7 +45,6 @@ public class PagoServiceImpl implements IPagoService {
         pago.setRecargo(recargo);
         pago.setMulta(multa);
         pagoRepository.save(pago);
-
         multa.setEstado(EstadoMulta.PAGADA);
         multaRepository.save(multa);
 
@@ -70,4 +69,6 @@ public class PagoServiceImpl implements IPagoService {
         dto.setMultaId(pago.getMulta().getId());
         return dto;
     }
+
+
 }
